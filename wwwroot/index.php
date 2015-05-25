@@ -9,9 +9,6 @@
     // Prepare newsitems
     $news = get_news();
 
-    // Prepare community headlines
-    $cnews = get_community_news();
-
     // Get a random welcome image
     $sql = '';
     $sql .= 'select a.attach_id ';
@@ -71,12 +68,12 @@
 			"https://www.youtube.com/embed/e0R2QsMwc98?rel=0&autohide=1", #NOTA trailer
 			"https://www.youtube.com/embed/vuP63IobLps?rel=0&autohide=1", #NOTA "Action Trailer"
 		);
-    $videofile = $videos[array_rand($videos)];
+    $videofile = str_replace("&", "&amp;", $videos[array_rand($videos)]);
 
     // Compose the frontpage
     $fptemplate = file_get_contents('templates/frontpage.html');
-    $fpkeys = array('#NEWSITEMS#', '#CNEWSITEMS#', '#WELCOME#', '#SCREEN1#', '#SCREEN2#', '#SCREEN3#', '#SCREEN4#', '#VIDEOFILE#');
-    $fpitems = array($news, $cnews, $welcome, $screenthumbs[0], $screenthumbs[1], $screenthumbs[2], $screenthumbs[3], $videofile);
+    $fpkeys = array('#NEWSITEMS#', '#WELCOME#', '#SCREEN1#', '#SCREEN2#', '#SCREEN3#', '#SCREEN4#', '#VIDEOFILE#');
+    $fpitems = array($news, $welcome, $screenthumbs[0], $screenthumbs[1], $screenthumbs[2], $screenthumbs[3], $videofile);
     $fp = str_replace($fpkeys, $fpitems, $fptemplate);
 
     // Compose the final page
@@ -85,7 +82,7 @@
     $metatemplate = file_get_contents('templates/meta.html');
 
     $html  = $starttemplate;
-    $html .= str_replace('{META}', '<link href="/indexv3.css" rel="stylesheet" type="text/css" />', $metatemplate);
+    $html .= str_replace('{META}', '<link href="/index.css?v=1" rel="stylesheet" type="text/css" />', $metatemplate);
     $html .= "<title>Spring RTS Engine</title>\n</head><body>";
     $html .= str_replace('{PAGE_TITLE}', '<img src="/images/homie.gif" width="11" height="10" border="0" alt=""/>&nbsp;Home', $headertemplate);
     $html .= $fp;
