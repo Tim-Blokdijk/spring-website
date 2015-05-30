@@ -1,0 +1,21 @@
+{
+	"name": "spring/merit",
+	"type": "phpbb-extension",
+	"description": "Extension allowing forum users to build a web of trust of users with 'merit'.",
+	"version": "0.1.0",
+	"time": "2015-05-30",
+	"license": "MIT",
+	"authors": [{
+			"name": "Tim Blokdijk",
+			"email": "tim@timblokdijk.nl"
+		}],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "Merit",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*"
+		}
+	}
+}

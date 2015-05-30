@@ -1,0 +1,61 @@
+<div class="panel bg2">
+	<div class="inner">
+		<div class="column1">
+			<h3>Merit Status</h3>
+			<dl class="details">
+				<dt>Merit:</dt> <dd>{MERIT}</dd>
+				<dt>Status:</dt> <dd>
+				<!-- IF CAN_GIVE_MERIT -->
+				<a href="{GIVE_MERIT_LINK}">{MERIT_STRING}</a>
+				<!-- ELSE -->
+				<style>
+					.roll {
+						animation-name: rolling;
+						animation-duration: 5s;
+						animation-timing-function: linear;
+						animation-iteration-count: infinite;
+						animation-play-state: running;
+						display: inline-block;
+					}
+					@keyframes rolling {
+						from {transform:rotate(0deg);}
+						to {transform:rotate(360deg);}
+					}
+					#dice {
+						text-align: center;
+					}
+				</style>
+				{MERIT_STRING}
+				<!-- ENDIF -->
+				<br>
+				<br>
+				</dd>
+			</dl>
+			<h3>Merit Requirements <span style="color:#800080">*</span></h3>
+			<dl class="details">
+				In order to give users a merit recommendation:<br>
+				{MERIT_REQUIREMENTS}
+				<br>
+				<span style="color:#800080">*</span> <a href="memberlist.php?mode=viewprofile&u=579">Tim Blokdijk</a> currently reserves the right to add/remove/change the requirements and/or your particular merit status.<br>
+				At this time, the requirements have not been well thought out, it's experimental.<br>
+				Feedback (<a href="https://github.com/Tim-Blokdijk/spring-website">or code</a>) for this merit feature is appreciated.
+			</dl>
+		</div>
+
+		<div class="column2">
+			<h3>Merit Information</h3>
+			<dl class="details">
+				Spring is "more or less" a meritocracy, we try to empower those who <i>do</i>.<br>
+				But how to determine who actually has "merit" in our meritocracy? Can this be formalized? Can this be done in a simple, transparent and self organizing way?<br>
+				The merit feature is an attempt to address these questions. It tries to create a "web of merit" between the people that maintain and develop the Spring open source ecosystem.<br>
+				<br>
+				Those with merit are encouraged to give merit recommendations to others that they think are capable and contributing members to our community.<br>
+				By recommending someone you indicate that you generally consider this persons input relevant, that the person has been involved in the spring ecosystem for some time and that you would like this person to remain productivly involved.<br>
+				<br>
+				The type of contribution someone makes does not have to be tangible (i.e. code or content), it's ok to give someone a merit recommendation for more abstract contributions like being an effective moderator or for communicating our project beyond the audience we tend to attract.<br>
+				A special case is giving merit recommendations for monetary contributions, you can do this but the monetary contribution needs to be significant and sustained over a longer period. And more importantly, has the person that gave the monetary contribution also monitored the effectiveness of his/her contribution. You have to judge the effect the money had on the project not the monetary value of the contribution.<br>
+				Keep in mind that it's also about signal vs. noice, people that are very active are not nessesaraly contributing.<br>
+			</dl>
+		</div>
+	</div>
+</div>

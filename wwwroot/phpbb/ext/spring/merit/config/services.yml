@@ -1,0 +1,16 @@
+services:
+    spring.merit.controller:
+        class: spring\merit\controller\merit
+        arguments:
+            - @request
+            - @controller.helper
+            - @template
+            - @user
+    spring.merit.listener:
+        class: spring\merit\event\subscriber
+        arguments:
+            - @controller.helper
+            - @template
+            - @user
+        tags:
+            - { name: event.listener }

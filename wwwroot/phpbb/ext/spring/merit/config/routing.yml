@@ -1,0 +1,3 @@
+spring_merit_controller:
+    path: /merit/confirm/{user_id}
+    defaults: { _controller: spring.merit.controller:handle }
