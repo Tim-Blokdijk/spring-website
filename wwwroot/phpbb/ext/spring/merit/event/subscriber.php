@@ -94,16 +94,16 @@ class subscriber implements EventSubscriberInterface
 			}
 
 			$this->template->assign_vars(array(
-				'MERIT' => $event['member']['user_spring_merit'] == 1 ? 'Yes' : 'No',
-				'CAN_GIVE_MERIT' => $merit->can_give(),
-				'GIVE_MERIT_LINK' => $this->helper->route('spring_merit_controller', array('user_id' => $event['member']['user_id'])),
-				'MERIT_STRING' => $merit_string,
+				'MERIT'              => $event['member']['user_spring_merit'] == 1 ? 'Yes' : 'No',
+				'CAN_GIVE_MERIT'     => $merit->can_give(),
+				'GIVE_MERIT_LINK'    => $this->helper->route('spring_merit_controller', array('user_id' => $event['member']['user_id'])),
+				'MERIT_STRING'       => $merit_string,
 				'MERIT_REQUIREMENTS' => $requirements
 			));
 		} else { # If the user is logged out, FIXME: Not tested..
 			$this->template->assign_vars(array(
-				'MERIT' => $event['member']['user_spring_merit'] == 1 ? 'Yes' : 'No',
-				'CAN_GIVE_MERIT' => false,
+				'MERIT'              => $event['member']['user_spring_merit'] == 1 ? 'Yes' : 'No',
+				'CAN_GIVE_MERIT'     => false,
 				'MERIT_REQUIREMENTS' => '<span style="color:#800080">*</span> Please login for merit requirements.'
 			));
 		}
@@ -112,7 +112,8 @@ class subscriber implements EventSubscriberInterface
 	public function load_merit_on_view_topic($event)
 	{
 		$this->template->assign_vars(array(
-			'MERIT'	=> $event['row']['user_spring_merit'] == 1 ? 'Yes' : 'No',
+			'SHOW_MERIT' => $event['row']['user_spring_merit'] == 1 ? true : false, # TODO Make this configurable, currently only show merit if it's "Yes".
+			'MERIT'	     => $event['row']['user_spring_merit'] == 1 ? 'Yes' : 'No',
 		));
 	}
 }

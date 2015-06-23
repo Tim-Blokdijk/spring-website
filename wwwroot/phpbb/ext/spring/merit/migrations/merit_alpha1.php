@@ -32,7 +32,8 @@ class merit_alpha1 extends \phpbb\db\migration\migration
 			),
 			'add_columns' => array(
 				$this->table_prefix . 'users' => array(
-					'user_spring_merit' => array('BOOL', 0),
+					'user_spring_merit'      => array('BOOL', 0),
+					'user_spring_merit_time' => array('TIMESTAMP', null),
 				),
 			),
 		);
@@ -44,6 +45,7 @@ class merit_alpha1 extends \phpbb\db\migration\migration
 			'drop_columns' => array(
 				$this->table_prefix . 'users' => array(
 					'user_spring_merit',
+					'user_spring_merit_time',
 				),
 			),
 			'drop_tables' => array(

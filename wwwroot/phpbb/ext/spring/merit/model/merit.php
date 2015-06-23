@@ -51,13 +51,13 @@ class merit
 
 		if ($this->check()) {
 			# Only place where recommendations are added to DB.
-			$db->sql_query('INSERT INTO ' . $table_prefix . 'spring_merit' . ' (merit_id, gave_merit, got_merit, time) VALUES (NULL , ' . (int) $this->current_user . ', ' . (int) $this->related_user . ', NOW())');
+			$db->sql_query('INSERT INTO ' . $table_prefix . 'spring_merit' . ' (merit_id, gave_merit, got_merit, time) VALUES (NULL , ' . (int) $this->current_user . ', ' . (int) $this->related_user . ', UNIX_TIMESTAMP())');
 
 			#TODO: Cache the recommendations and +1 to cache.
 
 			# Only place where 'merit' is set to true in DB.
 			if ($this->recommendations($this->required_recommendations, 'related_user')) {
-				$db->sql_query('UPDATE ' . USERS_TABLE . ' SET user_spring_merit = 1 WHERE user_spring_merit = 0 AND user_id = ' . (int) $this->related_user);
+				$db->sql_query('UPDATE ' . USERS_TABLE . ' SET user_spring_merit = 1, user_spring_merit_time = UNIX_TIMESTAMP() WHERE user_spring_merit = 0 AND user_id = ' . (int) $this->related_user);
 			}
 		}
 	}
