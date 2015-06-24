@@ -22,8 +22,10 @@ class subscriber implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.memberlist_view_profile'		=> 'load_merit_on_view_profile',
-			'core.viewtopic_cache_user_data'	=> 'load_merit_on_view_topic',
+			'core.viewtopic_cache_user_data'  => 'load_merit_on_view_topic',
+			'core.viewtopic_cache_guest_data' => 'load_merit_on_view_topic',
+			'core.viewtopic_modify_post_row'  => 'add_merit_on_view_topic',
+			'core.memberlist_view_profile'    => 'load_merit_on_view_profile'
 		);
 	}
 
@@ -111,9 +113,14 @@ class subscriber implements EventSubscriberInterface
 
 	public function load_merit_on_view_topic($event)
 	{
-		$this->template->assign_vars(array(
-			'SHOW_MERIT' => $event['row']['user_spring_merit'] == 1 ? true : false, # TODO Make this configurable, currently only show merit if it's "Yes".
-			'MERIT'	     => $event['row']['user_spring_merit'] == 1 ? 'Yes' : 'No',
-		));
+		$array = $event['user_cache_data'];
+		$merit = $event['row']['user_spring_merit'];
+		$array['merit'] = $merit;
+		$event['user_cache_data'] = $array;
+	}
+
+	public function add_merit_on_view_topic($event)
+	{
+		$event['post_row'] = array_merge($event['post_row'], array('MERIT' => $event['user_poster_data']['merit']));
 	}
 }
